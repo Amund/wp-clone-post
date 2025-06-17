@@ -1,0 +1,9 @@
+{
+	"name": "amund/wp-clone-post",
+	"type": "wordpress-muplugin",
+	"description": "Add a \"clone\" link to posts and pages",
+	"homepage": "https://github.com/Amund/wp-clone-post",
+	"require": {
+		"php": ">=8.1"
+	}
+}
