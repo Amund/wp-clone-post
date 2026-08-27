@@ -84,17 +84,17 @@ class WpClonePost
         }
 
         // clone post metas
-        $post_meta = get_post_meta($post_id);
-        if ($post_meta) {
-            foreach ($post_meta as $meta_key => $meta_values) {
-                if (in_array($meta_key, array('_edit_lock', '_wp_old_slug'))) {
-                    continue;
-                }
-                foreach ($meta_values as $meta_value) {
-                    add_post_meta($new_post_id, $meta_key, $meta_value);
-                }
-            }
-        }
+        // $post_meta = get_post_meta($post_id);
+        // if ($post_meta) {
+        //     foreach ($post_meta as $meta_key => $meta_values) {
+        //         if (in_array($meta_key, array('_edit_lock', '_wp_old_slug'))) {
+        //             continue;
+        //         }
+        //         foreach ($meta_values as $meta_value) {
+        //             add_post_meta($new_post_id, $meta_key, $meta_value);
+        //         }
+        //     }
+        // }
 
         // redirect to list
         wp_safe_redirect(
