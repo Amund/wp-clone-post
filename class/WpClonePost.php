@@ -72,7 +72,13 @@ class WpClonePost
             'menu_order'     => $post->menu_order,
             'post_status'    => 'draft',
         );
-        $new_post_id = wp_insert_post($args);
+        // wp_insert_post() attend des données slashées (il applique wp_unslash()) :
+        // sans wp_slash(), les antislashs du contenu sont perdus, notamment les échappements
+        // (\u0022, \u0026, \u003c…) du JSON des attributs de blocs (ACF, Gutenberg)
+        $new_post_id = wp_insert_post(wp_slash($args), true);
+        if (is_wp_error($new_post_id)) {
+            wp_die($new_post_id);
+        }
 
         // clone taxonomies
         $taxonomies = get_object_taxonomies($post->post_type); // returns array of taxonomy names for post type, ex array("category", "post_tag");
@@ -105,5 +111,6 @@ class WpClonePost
                 admin_url('edit.php')
             )
         );
+        exit;
     }
 }
